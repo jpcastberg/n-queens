@@ -14,27 +14,37 @@
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
 window.findNRooksSolution = function(n) { //save variables that don't change with recursion
-  var solution = [[1]]; 
+debugger;
+  var board = new Board({'n': n});
+  var boardRows = board.rows();
+  var solution = undefined;
   var piecesPlaced = 0;
   var placeRooksPosition = function (rowIndex, colIndex) { //recursion
-    //place piece
-    this.togglePiece(rowIndex, colIndex);
-    //run all checks
-    //if all checks pass, 
-    if(!this.hasAnyRooksConflicts()) {
-      if (piecesPlaced === n) { //base case
-        solution = this.rows();
-      } else {
-        //iterate through matrix
-        for (var i = 0; i = ) // finish for loop
+    for (var i = 0; i < board.rows().length; i++) {
+      //place piece
+      board.togglePiece(rowIndex, i);
+      piecesPlaced++;
+      //run all checks
+      //if all checks pass, 
+      if (!board.hasAnyRooksConflicts()) {
+        if (piecesPlaced === n) { //base case
+          solution = board.rows();
+          return solution;
+        } else {
+          //call placeRooksPosition
+          //iterate through matrix
+          return placeRooksPosition(rowIndex + 1, 0);
+        }
       }
-    }
-    //else if board has conflicts remove toggle 
-    //call placeRooksPosition on next toggle piece
-    //continue placing piece until tests passed (row & column conflicts)
-    //if pieces placed < n -> place another piece
-  }
-
+      //remove toggled piece
+      board.togglePiece(rowIndex, i);
+      //decrement piecesPlaced
+      piecesPlaced--;
+      //continue placing piece until tests passed (row & column conflicts)
+      //if pieces placed < n, place another piece
+    }     
+  }; 
+  solution = placeRooksPosition(0, 0);
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
 };
