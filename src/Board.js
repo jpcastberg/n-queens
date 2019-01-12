@@ -185,7 +185,7 @@
       var i;
       var len = this.rows().length;
       var counter = 0;
-      minorDiag >= len ? i = minorDiag-len + 1 : i = 0;
+      minorDiag >= len ? i = minorDiag - len + 1 : i = 0;
 
       for (i; i < len; i++) {
         counter += this.rows()[i][minorDiag - i];
@@ -198,7 +198,14 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var len = this.rows().length;
+      //end < this.rows().length * 2
+      for (var i  = 0; i < len * 2; i++) {
+        if(this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
