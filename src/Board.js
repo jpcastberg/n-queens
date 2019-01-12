@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -163,8 +163,8 @@
     hasAnyMajorDiagonalConflicts: function() {
       var len = this.rows().length;
 
-      var startInd = -len + 1;
-      var endInd = len - 1;
+      var startInd = -len + 2;
+      var endInd = len - 2;
 
       for (var i = startInd; i <= endInd; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
@@ -200,8 +200,8 @@
     hasAnyMinorDiagonalConflicts: function() {
       var len = this.rows().length;
       //end < this.rows().length * 2
-      for (var i  = 0; i < len * 2; i++) {
-        if(this.hasMinorDiagonalConflictAt(i)) {
+      for (var i = 1; i < len * 2 - 2; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) { //0-8
           return true;
         }
       }
