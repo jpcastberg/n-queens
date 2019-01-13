@@ -44,9 +44,10 @@ describe('solvers', function() {
             return memo + col;
           }, 0);
         }, 0);
-
+        
         expect(solutionBoard.get('n')).to.equal(n);
         expect(numPieces).to.equal(n);
+        //debugger;
         expect(solutionBoard.hasAnyQueensConflicts()).to.be.equal(false);
       });
 
@@ -72,7 +73,6 @@ describe('solvers', function() {
       _.range(0, 9).map(function(n) {
         var solutionCount = countNQueensSolutions(n);
         var expectedSolutionCount = [1, 1, 0, 0, 2, 10, 4, 40, 92][n];
-
         expect(solutionCount).to.be.equal(expectedSolutionCount);
       });
     });
